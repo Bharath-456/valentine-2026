@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Said YES! 💍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fff0f5;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 500px;
+            z-index: 10;
+            border: 1px solid #ffccd5;
+        }
+        h2 { font-family: 'Dancing Script', cursive; color: #880e4f; font-size: 3rem; margin-top: 0; }
+        p { color: #444; line-height: 1.8; font-size: 18px; font-style: italic; }
+        .signature { font-family: 'Dancing Script', cursive; color: #c2185b; font-size: 28px; margin-top: 20px; font-weight: bold; }
+        .music-btn {
+            background-color: #ff4d6d;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 25px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .heart { position: absolute; color: #ff4d6d; opacity: 0.6; animation: floatUp 4s linear infinite; pointer-events: none; }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>You said YES! 💍</h2>
+    <p>I don't know when it started...</p>
+    <p>But slowly, you became my favorite notification, my favorite smile, and the best part of my day. Whenever I talk to you, my worries become smaller and my happiness becomes bigger...</p>
+    <div class="signature">Love You Sooo Muchhh Bujjjiiiiiiiii 💜</div>
+    <button class="music-btn" onclick="toggleMusic()">🎵 Tap to Play Our Song</button>
+    <audio id="mySong" loop>
+        <source src="dhoni_song.mp3" type="audio/mpeg">
+    </audio>
+</div>
+<script>
+    const audio = document.getElementById('mySong');
+    function toggleMusic() { return audio.paused ? audio.play() : audio.pause(); }
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        const hearts = ['💜', '💖', '❤️', '🌸'];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+</script>
+</body>
+</html>
