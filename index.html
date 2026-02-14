@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>I Want To Tell You Something 💖</title>
     <style>
         body {
@@ -15,46 +15,68 @@
             background-color: #fff0f5;
             font-family: Arial, sans-serif;
             overflow: hidden;
+            text-align: center;
         }
-        h1 { color: #880e4f; margin-bottom: 5px; }
-        p { color: #555; font-size: 14px; margin-bottom: 20px; }
-        .buttons { display: flex; gap: 20px; }
+        h1 { color: #880e4f; margin-bottom: 5px; padding: 0 10px; }
+        p { color: #555; font-size: 16px; margin-bottom: 40px; }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; 
+            width: 100%;
+            height: 60px;
+        }
+
         button {
-            padding: 10px 25px;
+            padding: 12px 35px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
             font-weight: bold;
-            transition: 0.2s;
+            touch-action: manipulation;
         }
+
         .yes-btn { background-color: #4caf50; color: white; }
-        .no-btn {
-            background-color: #c2185b; color: white;
-            position: absolute; /* Needed for the jumping effect */
+
+        .no-btn { 
+            background-color: #c2185b; 
+            color: white; 
+            z-index: 999;
+            transition: 0.1s ease; /* Makes the jump look smoother */
         }
     </style>
 </head>
 <body>
 
-<h1>I Want To Tell You Something 💖</h1>
-<p>Before you answer, please read this 😊</p>
+    <h1>I Want To Tell You Something 💖</h1>
+    <p>Before you answer, please read this 😊</p>
 
-<div class="buttons">
-    <button class="yes-btn" onclick="location.href='yes_page.html'">YES</button>
-    <button class="no-btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">NO</button>
-</div>
+    <div class="button-container">
+        <button class="yes-btn" onclick="location.href='yes_page.html'">YES</button>
+        <button class="no-btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+    </div>
 
-<script>
-    function moveButton() {
-        const btn = document.getElementById('noButton');
-        // Calculate random positions (keeping button within screen bounds)
-        const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-
-        btn.style.left = `${x}px`;
-        btn.style.top = `${y}px`;
-    }
-</script>
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noButton');
+            
+            // Immediately force fixed positioning
+            btn.style.position = 'fixed'; 
+            
+            // Safe boundaries: screen width minus button width minus 50px padding
+            const maxX = window.innerWidth - btn.clientWidth - 50;
+            const maxY = window.innerHeight - btn.clientHeight - 50;
+            
+            // Ensure values are never negative
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+    </script>
 </body>
 </html>
